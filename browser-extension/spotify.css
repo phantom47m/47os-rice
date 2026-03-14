@@ -1,0 +1,35 @@
+/* 47 Glass - Spotify Web Player */
+
+html, body,
+#main,
+.Root,
+.main-view-container,
+.main-view-container__scroll-node,
+.os-content {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+.main-topBar-container {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+
+.main-yourLibraryX-entryPoints,
+nav[class*="sidebar"],
+.Root__nav-bar {
+  background: rgba(0, 0, 0, 0.88) !important;
+}
+
+.Root__now-playing-bar,
+footer {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+
+.main-card-card,
+[class*="CardButton"] {
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+
+[class*="tracklist"],
+[data-testid="tracklist-row"] {
+  background: rgba(0, 0, 0, 0.92) !important;
+}

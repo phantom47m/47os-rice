@@ -1,0 +1,26 @@
+/* 47 Glass - GitHub */
+
+html, body,
+.application-main,
+.Layout,
+.Layout-main,
+.Layout-sidebar,
+[data-color-mode="dark"] {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+.Header,
+.AppHeader {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+
+.repository-content,
+.Box,
+.markdown-body {
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+
+.file-navigation,
+.commit-tease-sha {
+  background: rgba(0, 0, 0, 0.92) !important;
+}

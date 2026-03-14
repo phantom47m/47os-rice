@@ -1,0 +1,31 @@
+/* 47 Glass - Google Search */
+
+html, body,
+#main,
+#cnt,
+#center_col,
+#rso,
+.sfbg,
+#searchform,
+.o3j99 {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+.RNNXgb,
+.SDkEP,
+form[role="search"] {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border-radius: 24px;
+}
+
+.g,
+.MjjYud {
+  background: rgba(0, 0, 0, 0.75) !important;
+  border-radius: 8px;
+  padding: 8px !important;
+}
+
+#hdtb,
+.sBbkle {
+  background: rgba(0, 0, 0, 0.85) !important;
+}

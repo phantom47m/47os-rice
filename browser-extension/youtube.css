@@ -1,0 +1,40 @@
+/* 47 Glass - YouTube */
+
+html, body,
+ytd-app,
+#content,
+ytd-browse,
+ytd-watch-flexy,
+ytd-page-manager,
+ytd-two-column-browse-results-renderer,
+ytd-rich-grid-renderer,
+#columns,
+#primary,
+#secondary {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+ytd-masthead,
+#masthead-container {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+
+ytd-mini-guide-renderer,
+ytd-guide-renderer,
+tp-yt-app-drawer,
+#guide-content {
+  background: rgba(0, 0, 0, 0.88) !important;
+}
+
+ytd-rich-item-renderer,
+ytd-compact-video-renderer,
+ytd-video-renderer {
+  background: rgba(0, 0, 0, 0.75) !important;
+  border-radius: 8px;
+}
+
+ytd-comments,
+ytd-comment-thread-renderer,
+ytd-item-section-renderer {
+  background: rgba(0, 0, 0, 0.92) !important;
+}

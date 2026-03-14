@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Window State Sound
+Exec=python3 $HOME/Documents/47industries/window-state-sound.py
+Hidden=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

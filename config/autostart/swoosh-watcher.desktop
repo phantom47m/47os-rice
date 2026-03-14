@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Swoosh Sound Watcher
+Comment=Plays swoosh sounds on downloads and deletions
+Exec=$HOME/.local/bin/swoosh-watcher.sh
+Hidden=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

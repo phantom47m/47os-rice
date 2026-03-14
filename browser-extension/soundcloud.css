@@ -1,0 +1,47 @@
+/* 47 Glass - SoundCloud */
+
+html, body,
+#app,
+.l-container,
+.l-main,
+.l-fluid-fixed,
+.l-fixed-top {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+.header,
+.headerMenu,
+.header__inner {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+
+.l-sidebar,
+.sidebarModule {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+.playControls,
+.playControls__inner {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+
+.soundList__item,
+.sound__body,
+.trackItem {
+  background: rgba(0, 0, 0, 0.75) !important;
+  border-radius: 4px;
+}
+
+.stream,
+.stream__list {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+.sound__waveform {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+.userInfoBar,
+.profileHeaderBackground {
+  background: rgba(0, 0, 0, 0.8) !important;
+}

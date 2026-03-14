@@ -69,7 +69,7 @@ class GhostModeApplet extends Applet.IconApplet {
             this.menu.addMenuItem(s);
             let off = new PopupMenu.PopupIconMenuItem("Disable Ghost Mode", "process-stop-symbolic", St.IconType.SYMBOLIC);
             off.connect("activate", () => {
-                Util.spawnCommandLine("bash /home/deansabr/.local/bin/ghost-mode.sh off");
+                Util.spawnCommandLine("bash " + GLib.build_filenamev([GLib.get_home_dir(), ".local/bin/ghost-mode.sh"]) + " off");
             });
             this.menu.addMenuItem(off);
         } else {
@@ -78,7 +78,7 @@ class GhostModeApplet extends Applet.IconApplet {
             this.menu.addMenuItem(s);
             let on = new PopupMenu.PopupIconMenuItem("Enable Ghost Mode", "security-high-symbolic", St.IconType.SYMBOLIC);
             on.connect("activate", () => {
-                Util.spawnCommandLine("bash /home/deansabr/.local/bin/ghost-mode.sh on");
+                Util.spawnCommandLine("bash " + GLib.build_filenamev([GLib.get_home_dir(), ".local/bin/ghost-mode.sh"]) + " on");
             });
             this.menu.addMenuItem(on);
         }

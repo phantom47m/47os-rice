@@ -1,0 +1,84 @@
+/* 47 Glass - Discord */
+
+html, body {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+[class^="app-"],
+[class^="bg-"],
+[class*="container-"],
+.notAppAsidePanel__9d124 {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+[class*="sidebar-"],
+[class*="guilds-"],
+nav[class*="wrapper-"] {
+  background: rgba(0, 0, 0, 0.88) !important;
+}
+
+[class*="scroller-"] {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+[class*="channel-"],
+[class*="channels-"] {
+  background: rgba(0, 0, 0, 0.88) !important;
+}
+
+[class*="chat-"],
+[class*="chatContent-"],
+[class*="messagesWrapper-"],
+main[class*="chatContent"] {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+[class*="members-"],
+[class*="membersWrap-"] {
+  background: rgba(0, 0, 0, 0.88) !important;
+}
+
+[class*="message-"][class*="cozy-"],
+[class*="messageListItem-"] {
+  background: rgba(0, 0, 0, 0.75) !important;
+  border-radius: 4px;
+}
+
+[class*="message-"]:hover {
+  background: rgba(0, 0, 0, 0.65) !important;
+}
+
+[class*="title-"][class*="container-"],
+section[class*="title-"],
+[class*="toolbar-"] {
+  background: rgba(0, 0, 0, 0.88) !important;
+}
+
+[class*="panels-"],
+section[class*="panel-"] {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+
+[class*="channelTextArea-"],
+form[class*="chatContent"] {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+[class*="scrollableContainer-"],
+[class*="inner-"][class*="textArea-"] {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border-radius: 8px;
+}
+
+[class*="blobContainer-"] {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+[class*="layer-"],
+[class*="theme-dark"] {
+  background-color: rgba(0, 0, 0, 0.92) !important;
+}
+
+[class*="scroller-"]::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.92) !important;
+}

@@ -1,0 +1,7 @@
+# Back side button — Enter key
+"xdotool key Return"
+  b:8
+
+# Forward side button — toggle transparency
+"$HOME/Documents/47industries/toggle-transparency.sh"
+  b:9

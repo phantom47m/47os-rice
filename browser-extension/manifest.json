@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "47 Glass",
+  "version": "1.1",
+  "description": "Transparent backgrounds + tab sounds for 47 Industries OS",
+  "permissions": ["tabs", "offscreen"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://discord.com/*"],
+      "css": ["discord.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://www.youtube.com/*"],
+      "css": ["youtube.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://github.com/*"],
+      "css": ["github.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://www.google.com/*"],
+      "css": ["google.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://soundcloud.com/*"],
+      "css": ["soundcloud.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://www.reddit.com/*", "*://old.reddit.com/*"],
+      "css": ["reddit.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://x.com/*", "*://twitter.com/*"],
+      "css": ["twitter.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://open.spotify.com/*"],
+      "css": ["spotify.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["tab-open.ogg", "tab-close.ogg", "offscreen.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

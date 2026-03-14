@@ -1,0 +1,31 @@
+/* 47 Glass - X/Twitter */
+
+html, body,
+#react-root,
+main,
+[data-testid="primaryColumn"],
+[data-testid="sidebarColumn"] {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+header[role="banner"] {
+  background: rgba(0, 0, 0, 0.88) !important;
+}
+
+article[data-testid="tweet"] {
+  background: rgba(0, 0, 0, 0.75) !important;
+  border-radius: 4px;
+}
+
+[data-testid="sidebarColumn"] > div {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+[data-testid="sidebarColumn"] section {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border-radius: 16px;
+}
+
+[data-testid="DMDrawer"] {
+  background: rgba(0, 0, 0, 0.85) !important;
+}

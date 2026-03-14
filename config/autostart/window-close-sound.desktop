@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Window Close Sound
+Exec=python3 $HOME/Documents/47industries/window-close-sound.py
+Hidden=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

@@ -1,0 +1,34 @@
+/* 47 Glass - Reddit */
+
+html, body,
+.main-container,
+#AppRouter-main-content,
+[class*="sidebar"],
+shreddit-app {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+reddit-header-large,
+reddit-header-action-items,
+header {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+
+shreddit-post,
+article,
+[class*="Post"],
+.thing {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border-radius: 8px;
+}
+
+[class*="feed"],
+[class*="Feed"],
+#main-content {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+shreddit-comment,
+[class*="Comment"] {
+  background: rgba(0, 0, 0, 0.75) !important;
+}

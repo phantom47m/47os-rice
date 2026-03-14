@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Devilspie2 Transparency
+Exec=devilspie2
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Comment=Global window transparency

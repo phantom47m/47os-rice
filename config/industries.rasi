@@ -1,0 +1,121 @@
+* {
+    base00: #263238;
+    base01: #2E3C43;
+    base02: #314549;
+    base03: #546E7A;
+    base04: #B2CCD6;
+    base05: #EEFFFF;
+    base06: #EEFFFF;
+    base07: #FFFFFF;
+    base08: #F07178;
+    base09: #F78C6C;
+    base0A: #FFCB6B;
+    base0B: #C3E88D;
+    base0C: #89DDFF;
+    base0D: #82AAFF;
+    base0E: #C792EA;
+    base0F: #FF5370;
+
+    spacing: 0;
+    background-color: transparent;
+}
+
+window {
+    transparency: "real";
+    background-color: #000000CC; /* 80% opacity */
+}
+
+mainbox {
+    children: [inputbar, message, mode-switcher, listview];
+    spacing: 30px;
+    padding: 30px 0;
+    border: 1px;
+    border-color: #00d1ff;
+}
+
+inputbar {
+    padding: 0 30px;
+    children: [prompt, textbox-prompt-colon, entry, case-indicator];
+}
+
+prompt {
+    text-color: #00d1ff;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+    margin: 0 1ch 0 0;
+    text-color: #00d1ff;
+}
+
+entry {
+    text-color: #00d1ff;
+}
+
+case-indicator {
+    text-color: @base0F;
+}
+
+mode-switcher, message {
+    border: 1px 0;
+    border-color: #00d1ff;
+}
+
+button, textbox {
+    background-color: #007d99;
+    text-color: #00d1ff;
+    padding: 5px;
+}
+
+button selected {
+    background-color: #007d99;
+}
+
+listview {
+    scrollbar: true;
+    margin: 0 10px 0 30px;
+}
+
+scrollbar {
+    background-color: #007d99;
+    handle-color: #00d1ff;
+    handle-width: 10px;
+    border: 0 1px;
+    border-color: #007d99;
+    margin: 0 0 0 20px;
+}
+
+element {
+    padding: 5px;
+    spacing: 5px;
+    highlight: bold underline;
+    children: [element-icon, element-text];
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color: #00d1ff;
+}
+
+element normal {
+    background-color: transparent;
+}
+
+element selected {
+    background-color: #007d99;
+}
+
+element selected element-text,
+element selected element-icon {
+    text-color: #4f0e85;
+}
+
+element alternate {
+    /* optional alternating background */
+}
+
+element urgent element-text,
+element urgent element-icon {
+    text-color: @base0F;
+}

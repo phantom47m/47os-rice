@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=XSS Lock
+Exec=xss-lock -- dm-tool lock
+Hidden=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

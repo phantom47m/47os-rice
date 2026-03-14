@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# 47 Industries - Unified Sound Control
+CONFIG_DIR="$HOME/.config/47industries"
+STATE_FILE="$CONFIG_DIR/sound-state"
+mkdir -p "$CONFIG_DIR"
+if [[ ! -f "$STATE_FILE" ]]; then
+    echo "muted=false" > "$STATE_FILE"
+    echo "volume=100" >> "$STATE_FILE"
+fi
+source "$STATE_FILE"
+save_state() {
+    echo "muted=$muted" > "$STATE_FILE"
+    echo "volume=$volume" >> "$STATE_FILE"
+}
+case "${1:-status}" in
+    mute) muted=true; save_state; echo "47Sound: Muted" ;;
+    unmute) muted=false; save_state; echo "47Sound: Unmuted (volume: ${volume}%)" ;;
+    toggle)
+        if [[ "$muted" == "true" ]]; then muted=false; save_state; echo "47Sound: Unmuted (volume: ${volume}%)"
+        else muted=true; save_state; echo "47Sound: Muted"; fi ;;
+    vol|volume)
+        if [[ -n "$2" ]]; then
+            vol_val="$2"
+            if [[ "$vol_val" =~ ^[0-9]+$ ]] && (( vol_val >= 0 && vol_val <= 100 )); then
+                volume="$vol_val"; save_state; echo "47Sound: Volume set to ${volume}%"
+            else echo "Error: Volume must be 0-100" >&2; exit 1; fi
+        else echo "47Sound: Volume is ${volume}%"; fi ;;
+    status)
+        if [[ "$muted" == "true" ]]; then echo "47Sound: MUTED (volume: ${volume}%)"
+        else echo "47Sound: ON (volume: ${volume}%)"; fi ;;
+    play)
+        shift; sound_file="$1"
+        [[ -z "$sound_file" ]] && { echo "Error: No sound file specified" >&2; exit 1; }
+        [[ "$muted" == "true" ]] && exit 0
+        [[ "$volume" -eq 0 ]] && exit 0
+        pa_vol=$(( volume * 65536 / 100 ))
+        paplay --volume="$pa_vol" "$sound_file" & ;;
+    *) echo "47 Industries Sound Control"; echo "Usage: 47sound {mute|unmute|toggle|vol [0-100]|status|play <file>}" ;;
+esac

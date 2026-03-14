@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=47 Lightsaber Drag Effect
+Comment=Plays lightsaber swoosh sounds when dragging windows
+Exec=$HOME/.local/bin/saber-drag.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=47 Glass Slider Inject
+Comment=Adds 47 Glass transparency slider to brightness applet
+Exec=$HOME/.local/bin/47glass-inject.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=5

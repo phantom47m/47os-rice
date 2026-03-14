@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# 47 Industries - Transparency level control
+STATE_DIR="$HOME/.config/47industries"
+STATE_FILE="$STATE_DIR/transparency-level"
+TRANS_STATE="/tmp/transparency_state"
+mkdir -p "$STATE_DIR"
+if [ ! -f "$STATE_FILE" ]; then echo "50" > "$STATE_FILE"; fi
+case "$1" in
+    get) cat "$STATE_FILE" ;;
+    set)
+        LEVEL="$2"
+        [ -z "$LEVEL" ] && exit 1
+        [ "$LEVEL" -lt 0 ] 2>/dev/null && LEVEL=0
+        [ "$LEVEL" -gt 100 ] 2>/dev/null && LEVEL=100
+        echo "$LEVEL" > "$STATE_FILE"
+        TSTATE=$(cat "$TRANS_STATE" 2>/dev/null)
+        [ "$TSTATE" != "on" ] && exit 0
+        WINDOW_OPACITY=$(awk "BEGIN { printf \"%.2f\", 1.0 - ($LEVEL * 0.007) }")
+        XPROP_VAL=$(awk "BEGIN { v = 1.0 - ($LEVEL * 0.007); printf \"0x%08X\", v * 4294967295 }")
+        TERM_TRANS=$(awk "BEGIN { printf \"%d\", $LEVEL * 0.85 }")
+        ALAC_OPACITY=$(awk "BEGIN { printf \"%.2f\", 1.0 - ($LEVEL * 0.007) }")
+        PROFILE=$(gsettings get org.gnome.Terminal.ProfilesList default 2>/dev/null | tr -d "'")
+        if [ -n "$PROFILE" ]; then
+            dconf write /org/gnome/terminal/legacy/profiles:/:$PROFILE/background-transparency-percent "$TERM_TRANS"
+        fi
+        ALAC_CFG="$HOME/.config/alacritty/alacritty.toml"
+        if [ -f "$ALAC_CFG" ]; then
+            sed -i "s/^opacity = .*/opacity = $ALAC_OPACITY/" "$ALAC_CFG"
+        fi
+        wmctrl -l 2>/dev/null | grep -v -E "nemo-desktop|Desktop$" | awk '{print $1}' | while read wid; do
+            CLS=$(xprop -id "$wid" WM_CLASS 2>/dev/null)
+            echo "$CLS" | grep -qi "gnome-terminal" && continue
+            echo "$CLS" | grep -qi "alacritty" && continue
+            xprop -id "$wid" -f _NET_WM_WINDOW_OPACITY 32c -set _NET_WM_WINDOW_OPACITY "$XPROP_VAL" &
+        done
+        wait
+        POPUP_ALPHA=$(awk "BEGIN { printf \"%.2f\", 1.0 - ($LEVEL * 0.009) }")
+        CSS_FILE="$HOME/.themes/WhiteSur-Dark/cinnamon/cinnamon.css"
+        CSS_TRANS="$HOME/.themes/WhiteSur-Dark/cinnamon/cinnamon-translucent.css"
+        for f in "$CSS_FILE" "$CSS_TRANS"; do
+            if [ -f "$f" ]; then
+                sed -i "s/background-color: rgba(10, 10, 10, [0-9.]*)/background-color: rgba(10, 10, 10, $POPUP_ALPHA)/g" "$f"
+            fi
+        done
+        dbus-send --session --dest=org.Cinnamon --type=method_call /org/Cinnamon org.Cinnamon.ReloadTheme ;;
+    *) echo "Usage: 47transparency {get|set <0-100>}" ;;
+esac
