@@ -1,0 +1,19 @@
+{
+  "logo": {
+    "source": "/tmp/.47logo-matrix.txt",
+    "color": { "1":"bright_white" }
+  },
+  "modules": [
+    { "type":"os","keyColor":"default","valueColor":"default" },
+    { "type":"kernel","keyColor":"default","valueColor":"default" },
+    { "type":"uptime","keyColor":"default","valueColor":"default" },
+    { "type":"memory","keyColor":"default","valueColor":"default" },
+    { "type":"cpu","keyColor":"default","valueColor":"default" },
+    { "type":"gpu","keyColor":"default","valueColor":"default" },
+    { "type":"shell","keyColor":"default","valueColor":"default" },
+    { "type":"wm","keyColor":"default","valueColor":"default" },
+    { "type":"de","keyColor":"default","valueColor":"default" },
+    { "type":"disk","keyColor":"default","valueColor":"default" },
+    { "type":"packages","keyColor":"default","valueColor":"default" }
+  ]
+}

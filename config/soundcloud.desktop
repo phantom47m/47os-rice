@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=SoundCloud
+Exec=brave-browser --app=https://soundcloud.com
+Icon=audio-headphones
+Type=Application
+Categories=Audio;Music;

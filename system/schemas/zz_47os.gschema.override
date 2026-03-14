@@ -9,7 +9,7 @@ font-name='SF Pro Display 10'
 
 [org.cinnamon.desktop.wm.preferences]
 theme='WhiteSur-Dark'
-titlebar-font='SF Pro Display Medium 10'
+titlebar-font='SF Pro Display Bold 10'
 
 [org.cinnamon.desktop.background]
 picture-uri='file:///usr/share/backgrounds/sequoia-sunrise.jpg'
@@ -23,7 +23,7 @@ font-name='SF Pro Display 10'
 
 [org.gnome.desktop.wm.preferences]
 theme='WhiteSur-Dark'
-titlebar-font='SF Pro Display Medium 10'
+titlebar-font='SF Pro Display Bold 10'
 
 [org.gnome.desktop.background]
 picture-uri='file:///usr/share/backgrounds/sequoia-sunrise.jpg'

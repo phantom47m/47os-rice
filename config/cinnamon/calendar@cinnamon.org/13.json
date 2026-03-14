@@ -1,0 +1,54 @@
+{
+    "section1": {
+        "type": "section",
+        "description": "Display"
+    },
+    "show-events": {
+        "type": "switch",
+        "default": true,
+        "description": "Show calendar events",
+        "value": true
+    },
+    "show-week-numbers": {
+        "type": "switch",
+        "default": false,
+        "description": "Show week numbers in calendar",
+        "value": false
+    },
+    "use-custom-format": {
+        "type": "switch",
+        "default": false,
+        "description": "Use a custom date format",
+        "value": true
+    },
+    "custom-format": {
+        "type": "entry",
+        "default": "%A, %B %e, %H:%M",
+        "description": "Date format",
+        "dependency": "use-custom-format",
+        "value": "%a %b %-d  %-I:%M %p"
+    },
+    "custom-tooltip-format": {
+        "type": "entry",
+        "default": "%A, %B %e, %H:%M",
+        "description": "Date format for tooltip",
+        "dependency": "use-custom-format",
+        "value": "%A, %B %e, %H:%M"
+    },
+    "format-button": {
+        "type": "button",
+        "description": "Show information on date format syntax",
+        "dependency": "use-custom-format",
+        "callback": "on_custom_format_button_pressed"
+    },
+    "section2": {
+        "type": "section",
+        "description": "Keyboard shortcuts"
+    },
+    "keyOpen": {
+        "type": "keybinding",
+        "description": "Show calendar",
+        "default": "<Super>c",
+        "value": "<Super>c"
+    }
+}

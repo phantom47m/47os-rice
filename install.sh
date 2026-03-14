@@ -344,6 +344,27 @@ progress "Deploying configuration files..."
 mkdir -p "$HOME/.config/alacritty"
 cp "$SCRIPT_DIR/config/alacritty/alacritty.toml" "$HOME/.config/alacritty/"
 
+# Devilspie2 transparency rules (required for transparency toggle to work)
+mkdir -p "$HOME/.config/devilspie2"
+cp "$SCRIPT_DIR/config/devilspie2/transparency.lua" "$HOME/.config/devilspie2/"
+
+# Fastfetch
+mkdir -p "$HOME/.config/fastfetch"
+cp "$SCRIPT_DIR/config/fastfetch/config.jsonc" "$HOME/.config/fastfetch/"
+
+# Cinnamon spices configs (calendar format, wobbly windows tuning)
+mkdir -p "$HOME/.config/cinnamon/spices/calendar@cinnamon.org"
+cp "$SCRIPT_DIR/config/cinnamon/calendar@cinnamon.org/13.json" "$HOME/.config/cinnamon/spices/calendar@cinnamon.org/"
+mkdir -p "$HOME/.config/cinnamon/spices/compiz-windows-effect@hermes83.github.com"
+cp "$SCRIPT_DIR/config/cinnamon/compiz-windows-effect@hermes83.github.com/"*.json "$HOME/.config/cinnamon/spices/compiz-windows-effect@hermes83.github.com/" 2>/dev/null
+
+# SoundCloud web app
+mkdir -p "$HOME/.local/share/applications"
+cp "$SCRIPT_DIR/config/soundcloud.desktop" "$HOME/.local/share/applications/"
+
+# Set Brave as default browser
+cp "$SCRIPT_DIR/config/mimeapps.list" "$HOME/.config/"
+
 # GTK-3.0 — append, don't replace
 mkdir -p "$HOME/.config/gtk-3.0"
 if [ -f "$HOME/.config/gtk-3.0/gtk.css" ]; then
@@ -496,7 +517,7 @@ gset org.cinnamon.desktop.interface icon-theme 'WhiteSur-dark'
 gset org.cinnamon.desktop.interface cursor-theme 'WhiteSur-cursors'
 gset org.cinnamon.desktop.interface font-name 'SF Pro Display 10'
 gset org.cinnamon.desktop.wm.preferences theme 'WhiteSur-Dark'
-gset org.cinnamon.desktop.wm.preferences titlebar-font 'SF Pro Display Medium 10'
+gset org.cinnamon.desktop.wm.preferences titlebar-font 'SF Pro Display Bold 10'
 gset org.cinnamon.desktop.background picture-uri 'file:///usr/share/backgrounds/sequoia-sunrise.jpg'
 gset org.cinnamon.desktop.background picture-options 'zoom'
 
@@ -504,11 +525,24 @@ gset org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'
 gset org.gnome.desktop.interface icon-theme 'WhiteSur-dark'
 gset org.gnome.desktop.interface cursor-theme 'WhiteSur-cursors'
 
-# Panel — move to top, set height
+# Panel — move to top, set height, icon sizes
 gset org.cinnamon panels-enabled "['1:0:top']"
 gset org.cinnamon panels-height "['1:28']"
 gset org.cinnamon panel-scale-text-icons true
 gset org.cinnamon app-menu-icon-name '47os-logo'
+gset org.cinnamon system-icon '47os-logo'
+dconf write /org/cinnamon/panel-zone-icon-sizes "'[{\"panelId\": 1, \"left\": 22, \"center\": 0, \"right\": 24}]'" 2>/dev/null
+dconf write /org/cinnamon/panel-zone-symbolic-icon-sizes "'[{\"panelId\": 1, \"left\": 28, \"center\": 28, \"right\": 16}]'" 2>/dev/null
+dconf write /org/cinnamon/next-applet-id 22 2>/dev/null
+
+# Startup animation off, effects tuning
+dconf write /org/cinnamon/startup-animation false 2>/dev/null
+dconf write /org/cinnamon/enable-vfade false 2>/dev/null
+dconf write /org/cinnamon/window-effect-speed 2 2>/dev/null
+dconf write /org/cinnamon/enable-animations true 2>/dev/null
+
+# Hot corners — only bottom-right scale enabled
+dconf write /org/cinnamon/hotcorner-layout "['expo:false:0', 'scale:false:0', 'scale:true:0', 'desktop:false:0']" 2>/dev/null
 
 # Desktop icons off
 gset org.nemo.desktop computer-icon-visible false
@@ -516,6 +550,43 @@ gset org.nemo.desktop home-icon-visible false
 gset org.nemo.desktop network-icon-visible false
 gset org.nemo.desktop trash-icon-visible false
 gset org.nemo.desktop volumes-visible false
+gset org.nemo.desktop font 'SF Pro Display 10'
+
+# Window manager — button layout, titlebar font
+gset org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
+gset org.cinnamon.desktop.wm.preferences titlebar-font 'SF Pro Display Bold 10'
+
+# Muffin compositor
+dconf write /org/cinnamon/muffin/draggable-border-width 10 2>/dev/null
+dconf write /org/cinnamon/muffin/edge-tiling false 2>/dev/null
+dconf write /org/cinnamon/muffin/placement-mode "'pointer'" 2>/dev/null
+dconf write /org/cinnamon/muffin/unredirect-fullscreen-windows true 2>/dev/null
+
+# Screensaver / lock screen
+dconf write /org/cinnamon/desktop/screensaver/lock-enabled false 2>/dev/null
+dconf write /org/cinnamon/desktop/screensaver/lock-delay "uint32 0" 2>/dev/null
+dconf write /org/cinnamon/desktop/screensaver/allow-media-control false 2>/dev/null
+dconf write /org/cinnamon/desktop/screensaver/floating-widgets false 2>/dev/null
+dconf write /org/cinnamon/desktop/screensaver/show-album-art false 2>/dev/null
+dconf write /org/cinnamon/desktop/screensaver/show-info-panel true 2>/dev/null
+dconf write /org/cinnamon/desktop/screensaver/show-notifications false 2>/dev/null
+dconf write /org/cinnamon/desktop/screensaver/font-date "'%A, %B %-d'" 2>/dev/null
+dconf write /org/cinnamon/desktop/screensaver/font-time "'%-I:%M %p'" 2>/dev/null
+
+# Sound: disable system event sounds (we use our own)
+dconf write /org/cinnamon/desktop/sound/event-sounds false 2>/dev/null
+
+# Keyboard: numlock on, repeat settings
+dconf write /org/cinnamon/desktop/peripherals/keyboard/numlock-state true 2>/dev/null
+dconf write /org/cinnamon/desktop/peripherals/keyboard/delay "uint32 500" 2>/dev/null
+dconf write /org/cinnamon/desktop/peripherals/keyboard/repeat-interval "uint32 30" 2>/dev/null
+
+# Power: never sleep display on AC
+dconf write /org/cinnamon/settings-daemon/plugins/power/sleep-display-ac 0 2>/dev/null
+
+# Disable built-in keybindings that conflict with our custom ones
+dconf write /org/cinnamon/desktop/keybindings/media-keys/screensaver "['']" 2>/dev/null
+dconf write /org/cinnamon/desktop/keybindings/media-keys/terminal "['']" 2>/dev/null
 
 # Desktop effects
 gset org.cinnamon desktop-effects true
