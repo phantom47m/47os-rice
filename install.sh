@@ -143,10 +143,25 @@ if sudo apt install -y \
     alacritty plank rofi xdotool wmctrl xbindkeys xss-lock \
     brightnessctl pulseaudio-utils \
     inotify-tools devilspie2 macchanger x11-utils \
-    python3 jq curl wget git dconf-cli 2>/dev/null; then
+    python3 jq curl wget git dconf-cli \
+    gnome-maps gnome-contacts gnome-clocks gnome-calendar cheese \
+    rhythmbox shotwell drawing simple-scan 2>/dev/null; then
     ok "Done."
 else
-    fail "Some packages may not have installed. Continuing anyway."
+    warn "Some packages may not have installed. Non-critical — continuing."
+fi
+
+# Install Brave browser if not present
+if ! command -v brave-browser &>/dev/null; then
+    echo "  Installing Brave browser..."
+    sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg \
+        https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg 2>/dev/null
+    echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | \
+        sudo tee /etc/apt/sources.list.d/brave-browser-release.list > /dev/null 2>/dev/null
+    sudo apt update -qq 2>/dev/null
+    sudo apt install -y brave-browser 2>/dev/null && ok "Brave browser installed." || warn "Brave browser install failed. You can install it manually."
+else
+    ok "Brave browser already installed."
 fi
 
 # ============================================================
@@ -174,13 +189,17 @@ fi
 
 # Patch the Cinnamon CSS for transparency support
 if [ -d "$HOME/.themes/WhiteSur-Dark/cinnamon" ]; then
+    # Install opaque + translucent CSS variants (full theme files)
     cp "$SCRIPT_DIR/assets/theme-patches/cinnamon-opaque.css" "$HOME/.themes/WhiteSur-Dark/cinnamon/" 2>/dev/null
     cp "$SCRIPT_DIR/assets/theme-patches/cinnamon-translucent.css" "$HOME/.themes/WhiteSur-Dark/cinnamon/" 2>/dev/null
     mkdir -p "$HOME/.themes/WhiteSur-Dark/cinnamon/assets"
     cp "$SCRIPT_DIR/assets/theme-patches/menu-opaque.svg" "$HOME/.themes/WhiteSur-Dark/cinnamon/assets/" 2>/dev/null
     cp "$SCRIPT_DIR/assets/theme-patches/menu-translucent.svg" "$HOME/.themes/WhiteSur-Dark/cinnamon/assets/" 2>/dev/null
-    cp "$HOME/.themes/WhiteSur-Dark/cinnamon/cinnamon-opaque.css" "$HOME/.themes/WhiteSur-Dark/cinnamon/cinnamon.css" 2>/dev/null
-    cp "$HOME/.themes/WhiteSur-Dark/cinnamon/assets/menu-opaque.svg" "$HOME/.themes/WhiteSur-Dark/cinnamon/assets/menu.svg" 2>/dev/null
+    # Set initial state to opaque (solid)
+    cp "$SCRIPT_DIR/assets/theme-patches/cinnamon-opaque.css" "$HOME/.themes/WhiteSur-Dark/cinnamon/cinnamon.css" 2>/dev/null
+    cp "$SCRIPT_DIR/assets/theme-patches/menu-opaque.svg" "$HOME/.themes/WhiteSur-Dark/cinnamon/assets/menu.svg" 2>/dev/null
+    # Initialize transparency state to off
+    echo "off" > /tmp/transparency_state
 fi
 
 # ============================================================
@@ -388,6 +407,25 @@ for size in 16 22 24 32 48 64 128 256; do
 done
 sudo gtk-update-icon-cache /usr/share/icons/hicolor/ 2>/dev/null
 
+# Copy theme, icons, cursors, fonts SYSTEM-WIDE so login screen can see them
+# (slick-greeter runs as root and can't see ~/.themes or ~/.local/share)
+if [ -d "$HOME/.themes/WhiteSur-Dark" ]; then
+    sudo cp -r "$HOME/.themes/WhiteSur-Dark" /usr/share/themes/ 2>/dev/null
+    ok "Theme copied to /usr/share/themes/ for login screen."
+fi
+if [ -d "$HOME/.local/share/icons/WhiteSur-dark" ]; then
+    sudo cp -r "$HOME/.local/share/icons/WhiteSur-dark" /usr/share/icons/ 2>/dev/null
+    ok "Icons copied to /usr/share/icons/ for login screen."
+fi
+if [ -d "$HOME/.local/share/icons/WhiteSur-cursors" ]; then
+    sudo cp -r "$HOME/.local/share/icons/WhiteSur-cursors" /usr/share/icons/ 2>/dev/null
+    ok "Cursors copied to /usr/share/icons/ for login screen."
+fi
+# Fonts system-wide for login screen
+sudo mkdir -p /usr/local/share/fonts/47os
+sudo cp "$SCRIPT_DIR/assets/fonts/"* /usr/local/share/fonts/47os/ 2>/dev/null
+sudo fc-cache -f 2>/dev/null
+
 # Login screen — BACKUP first
 if [ -f /etc/lightdm/slick-greeter.conf ]; then
     sudo cp /etc/lightdm/slick-greeter.conf "$BACKUP_DIR/slick-greeter.conf.bak"
@@ -466,7 +504,8 @@ gset org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'
 gset org.gnome.desktop.interface icon-theme 'WhiteSur-dark'
 gset org.gnome.desktop.interface cursor-theme 'WhiteSur-cursors'
 
-# Panel — keep existing panels, just set height
+# Panel — move to top, set height
+gset org.cinnamon panels-enabled "['1:0:top']"
 gset org.cinnamon panels-height "['1:28']"
 gset org.cinnamon panel-scale-text-icons true
 gset org.cinnamon app-menu-icon-name '47os-logo'
@@ -577,9 +616,11 @@ fi
 
 gset org.cinnamon enabled-applets "$NEW_APPLETS"
 
-# Configure the app menu icon
+# Configure the app menu icon — find the actual instance ID from enabled-applets
+MENU_INSTANCE_ID=$(gsettings get org.cinnamon enabled-applets 2>/dev/null | grep -oP 'menu@cinnamon\.org:\K\d+' | head -1)
+MENU_INSTANCE_ID="${MENU_INSTANCE_ID:-0}"
 mkdir -p "$HOME/.config/cinnamon/spices/menu@cinnamon.org"
-cat > "$HOME/.config/cinnamon/spices/menu@cinnamon.org/0.json" <<MENUJSON
+cat > "$HOME/.config/cinnamon/spices/menu@cinnamon.org/${MENU_INSTANCE_ID}.json" <<MENUJSON
 {
     "menu-icon-custom": {"type": "checkbox", "default": true, "value": true},
     "menu-icon": {"type": "iconfilechooser", "default": "", "value": "$HOME/Documents/47industries/panel-icon.png"},
