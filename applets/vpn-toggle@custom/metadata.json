@@ -1,0 +1,7 @@
+{
+    "uuid": "vpn-toggle@custom",
+    "name": "VPN Toggle",
+    "description": "ProtonVPN quick connect/disconnect with location picker",
+    "version": "1.0",
+    "cinnamon-version": ["5.0"]
+}

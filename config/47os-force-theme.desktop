@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=47 OS Theme Enforcement
+Exec=/usr/local/bin/47os-force-theme.sh
+Hidden=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Phase=Initialization
+X-MATE-Autostart-Phase=Initialization

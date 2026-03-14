@@ -1,0 +1,7 @@
+{
+    "uuid": "brightness@custom",
+    "name": "Brightness Control",
+    "description": "Control screen and keyboard brightness",
+    "version": "1.0",
+    "cinnamon-version": ["5.0"]
+}

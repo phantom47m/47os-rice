@@ -1,0 +1,7 @@
+{
+    "uuid": "fake-wifi@custom",
+    "name": "WiFi Icon (Always On)",
+    "description": "Shows a WiFi icon regardless of connection type",
+    "version": "1.0",
+    "cinnamon-version": ["5.0"]
+}

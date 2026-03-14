@@ -1,0 +1,7 @@
+{
+    "uuid": "47sound@custom",
+    "name": "47 Sound Control",
+    "description": "Volume and mute control for 47 Industries system sounds",
+    "version": "1.0",
+    "cinnamon-version": ["5.0"]
+}

@@ -1,0 +1,43 @@
+[font]
+size = 12.0
+
+[font.normal]
+family = "monospace"
+style = "Regular"
+
+[colors.primary]
+background = "#000000"
+foreground = "#00d1ff"
+
+[colors.normal]
+black   = "#1a1a2e"
+red     = "#ff4444"
+green   = "#00ff88"
+yellow  = "#ffcc00"
+blue    = "#00d1ff"
+magenta = "#cc00ff"
+cyan    = "#00d1ff"
+white   = "#e0e0e0"
+
+[colors.bright]
+black   = "#333355"
+red     = "#ff6666"
+green   = "#33ffaa"
+yellow  = "#ffdd44"
+blue    = "#00d1ff"
+magenta = "#dd44ff"
+cyan    = "#00d1ff"
+white   = "#ffffff"
+
+[shell]
+program = "bash"
+args = ["-l"]
+
+[[mouse.bindings]]
+mouse = "Right"
+action = "Paste"
+
+[window]
+opacity = 1.0
+decorations = "Full"
+padding = { x = 8, y = 8 }

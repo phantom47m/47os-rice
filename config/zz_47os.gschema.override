@@ -1,0 +1,43 @@
+[org.cinnamon.theme]
+name='WhiteSur-Dark'
+
+[org.cinnamon.desktop.interface]
+cursor-theme='WhiteSur-cursors'
+gtk-theme='WhiteSur-Dark'
+icon-theme='WhiteSur-dark'
+font-name='SF Pro Display 10'
+
+[org.cinnamon.desktop.wm.preferences]
+theme='WhiteSur-Dark'
+titlebar-font='SF Pro Display Medium 10'
+
+[org.cinnamon.desktop.background]
+picture-uri='file:///usr/share/backgrounds/sequoia-sunrise.jpg'
+picture-options='zoom'
+
+[org.gnome.desktop.interface]
+cursor-theme='WhiteSur-cursors'
+gtk-theme='WhiteSur-Dark'
+icon-theme='WhiteSur-dark'
+font-name='SF Pro Display 10'
+
+[org.gnome.desktop.wm.preferences]
+theme='WhiteSur-Dark'
+titlebar-font='SF Pro Display Medium 10'
+
+[org.gnome.desktop.background]
+picture-uri='file:///usr/share/backgrounds/sequoia-sunrise.jpg'
+picture-options='zoom'
+
+[org.cinnamon]
+app-menu-icon-name="47os-logo"
+system-icon="47os-logo"
+panel-scale-text-icons=true
+workspace-expo-view-as-grid=true
+
+[org.nemo.desktop]
+computer-icon-visible=false
+home-icon-visible=false
+network-icon-visible=false
+trash-icon-visible=false
+volumes-visible=false
