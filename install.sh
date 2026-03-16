@@ -164,6 +164,29 @@ else
     ok "Brave browser already installed."
 fi
 
+# Remove Firefox — Brave is the 47OS browser
+if dpkg -l firefox 2>/dev/null | grep -q "^ii"; then
+    echo "  Removing Firefox..."
+    sudo apt remove -y firefox firefox-locale-en 2>/dev/null
+    sudo apt autoremove -y 2>/dev/null
+    ok "Firefox removed. Brave is the default browser."
+fi
+
+# Install Claude Code CLI
+if ! command -v claude &>/dev/null; then
+    echo "  Installing Claude Code..."
+    if command -v npm &>/dev/null; then
+        sudo npm install -g @anthropic-ai/claude-code 2>/dev/null && ok "Claude Code installed." || warn "Claude Code npm install failed."
+    else
+        # Install Node.js first
+        curl -fsSL https://deb.nodesource.com/setup_22.x 2>/dev/null | sudo -E bash - 2>/dev/null
+        sudo apt install -y nodejs 2>/dev/null
+        sudo npm install -g @anthropic-ai/claude-code 2>/dev/null && ok "Claude Code installed." || warn "Claude Code install failed. Run: sudo npm install -g @anthropic-ai/claude-code"
+    fi
+else
+    ok "Claude Code already installed."
+fi
+
 # ============================================================
 # STEP 2: Install WhiteSur GTK Theme
 # ============================================================
