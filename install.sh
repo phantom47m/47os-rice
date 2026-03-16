@@ -169,24 +169,15 @@ fi
 # ============================================================
 progress "Installing WhiteSur GTK theme..."
 if [ -d "$HOME/.themes/WhiteSur-Dark" ]; then
-    ok "WhiteSur-Dark theme already installed, skipping download."
+    ok "WhiteSur-Dark theme already installed, skipping."
 else
-    cd /tmp
-    rm -rf WhiteSur-gtk-theme
-    if git clone --depth 1 https://github.com/vinceliuice/WhiteSur-gtk-theme.git 2>/dev/null; then
-        cd WhiteSur-gtk-theme
-        # WhiteSur installer needs a PTY for its spinner animation
-        script -qc "./install.sh -c dark" /dev/null > /dev/null 2>&1
-        if [ -d "$HOME/.themes/WhiteSur-Dark" ]; then
-            ok "WhiteSur GTK theme installed."
-        else
-            fail "WhiteSur theme install failed. Try running manually: cd /tmp/WhiteSur-gtk-theme && ./install.sh -c dark"
-        fi
-        cd "$SCRIPT_DIR"
+    # Extract pre-built theme (avoids WhiteSur installer PTY issues)
+    mkdir -p "$HOME/.themes"
+    tar xzf "$SCRIPT_DIR/assets/whitesur-dark-theme.tar.gz" -C "$HOME/.themes/" 2>/dev/null
+    if [ -d "$HOME/.themes/WhiteSur-Dark" ]; then
+        ok "WhiteSur GTK theme installed."
     else
-        fail "Could not clone WhiteSur theme. Check internet connection."
-        echo -e "  ${RED}The WhiteSur theme is required. Install will continue but the desktop may look broken.${RESET}"
-        echo -e "  ${RED}Re-run this script once you have internet access.${RESET}"
+        fail "WhiteSur theme extraction failed."
     fi
 fi
 
