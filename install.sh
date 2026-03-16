@@ -355,7 +355,7 @@ APPLET_DIR="$HOME/.local/share/cinnamon/applets"
 mkdir -p "$APPLET_DIR"
 
 for applet in ghost-mode@custom brightness@custom fake-battery@custom \
-              fake-wifi@custom 47sound@custom vpn-toggle@custom; do
+              fake-wifi@custom 47sound@custom vpn-toggle@custom sound@cinnamon.org; do
     if [ -d "$SCRIPT_DIR/applets/$applet" ]; then
         cp -r "$SCRIPT_DIR/applets/$applet" "$APPLET_DIR/"
     else
