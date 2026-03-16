@@ -432,6 +432,7 @@ fi
 if [ ! -f "$HOME/.config/47industries/transparency-level" ]; then
     echo "50" > "$HOME/.config/47industries/transparency-level"
 fi
+echo "off" > /tmp/transparency_state
 
 ok "Done."
 
