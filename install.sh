@@ -583,10 +583,13 @@ fi
 # Init transparency state
 echo "off" > "$HOME/.config/47industries/transparency-state"
 
+# Reload Cinnamon to pick up the menu icon change
+sleep 1
+DISPLAY=:0 dbus-send --session --dest=org.Cinnamon --type=method_call \
+    /org/Cinnamon org.Cinnamon.Eval string:"global.reexec_self();" 2>/dev/null
+
 # Self-destruct
 rm -f "$HOME/.config/autostart/47os-first-login.desktop"
-
-notify-send "47 Industries" "Rice active." -i dialog-information
 APPLYSCRIPT
 
 chmod +x "$HOME/.config/47industries/apply-rice.sh"
