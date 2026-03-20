@@ -54,7 +54,7 @@ numlock-state=true
 
 [org/cinnamon/muffin]
 draggable-border-width=10
-edge-tiling=false
+edge-tiling=true
 placement-mode='pointer'
 unredirect-fullscreen-windows=true
 

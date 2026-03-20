@@ -181,6 +181,16 @@ pkill -f swoosh-watcher.sh 2>/dev/null
 pkill -f window-close-sound.py 2>/dev/null
 pkill -f window-state-sound.py 2>/dev/null
 
+# Remove Rofi spotlight theme
+rm -f "$HOME/.config/rofi/themes/spotlight.rasi" 2>/dev/null
+
+# Remove Nemo actions
+rm -f "$HOME/.local/share/nemo/actions/extract-here.nemo_action" 2>/dev/null
+
+# Remove auto-extract handler
+rm -f "$HOME/.local/share/applications/auto-extract.desktop" 2>/dev/null
+xdg-mime default org.gnome.FileRoller.desktop application/zip 2>/dev/null
+
 echo -e "  ${GREEN}Done.${RESET}"
 
 # ============================================================

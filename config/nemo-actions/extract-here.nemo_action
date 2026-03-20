@@ -1,0 +1,8 @@
+[Nemo Action]
+Name=Extract Here
+Comment=Extract archive to current directory
+Exec=bash -c 'cd "$(dirname "%F")" && for f in %F; do case "$f" in *.zip) unzip -o "$f" -d "$(dirname "$f")";; *.tar.gz|*.tgz) tar xzf "$f" -C "$(dirname "$f")";; *.tar.bz2) tar xjf "$f" -C "$(dirname "$f")";; *.tar.xz) tar xJf "$f" -C "$(dirname "$f")";; *.tar) tar xf "$f" -C "$(dirname "$f")";; *.rar) unrar x "$f" "$(dirname "$f")"/;; *.7z) 7z x "$f" -o"$(dirname "$f")";; esac; done'
+Icon-Name=extract-archive-symbolic
+Selection=Any
+Extensions=zip;tar.gz;tgz;tar.bz2;tar.xz;tar;rar;7z;
+Mimetypes=application/zip;application/x-compressed-tar;application/x-bzip-compressed-tar;application/x-xz-compressed-tar;application/x-tar;application/x-rar;application/x-7z-compressed;

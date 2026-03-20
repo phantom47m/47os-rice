@@ -141,7 +141,7 @@ progress "Installing system packages..."
 sudo apt update -qq 2>/dev/null
 if sudo apt install -y \
     alacritty plank rofi xdotool wmctrl xbindkeys xss-lock \
-    brightnessctl pulseaudio-utils \
+    brightnessctl pulseaudio-utils maim nemo-preview \
     inotify-tools devilspie2 macchanger x11-utils \
     python3 jq curl wget git dconf-cli lm-sensors \
     gnome-maps gnome-contacts gnome-clocks gnome-calendar cheese \
@@ -321,7 +321,8 @@ mkdir -p "$HOME/Documents/47industries"
 for script in launch-terminal.sh toggle-transparency.sh window-close-sound.py \
               window-state-sound.py brightness-tracker.sh volume-tracker.sh \
               close-window.sh maximize-window.sh minimize-window.sh \
-              fullscreen-toggle.sh lock-screen.sh powermenu.sh app-search.sh; do
+              fullscreen-toggle.sh lock-screen.sh powermenu.sh app-search.sh \
+              spotlight-search.sh screenshot-float.sh; do
     if [ -f "$SCRIPT_DIR/scripts/$script" ]; then
         cp "$SCRIPT_DIR/scripts/$script" "$HOME/Documents/47industries/$script"
         chmod +x "$HOME/Documents/47industries/$script"
@@ -393,6 +394,18 @@ cp "$SCRIPT_DIR/config/alacritty/alacritty.toml" "$HOME/.config/alacritty/"
 # Devilspie2 transparency rules (required for transparency toggle to work)
 mkdir -p "$HOME/.config/devilspie2"
 cp "$SCRIPT_DIR/config/devilspie2/transparency.lua" "$HOME/.config/devilspie2/"
+
+# Spotlight search (Rofi theme)
+mkdir -p "$HOME/.config/rofi/themes"
+cp "$SCRIPT_DIR/config/rofi/spotlight.rasi" "$HOME/.config/rofi/themes/" 2>/dev/null
+
+# Nemo actions (right-click extract, etc.)
+mkdir -p "$HOME/.local/share/nemo/actions"
+cp "$SCRIPT_DIR/config/nemo-actions/"*.nemo_action "$HOME/.local/share/nemo/actions/" 2>/dev/null
+
+# Auto-extract on double-click (zip, tar, etc.)
+cp "$SCRIPT_DIR/config/auto-extract.desktop" "$HOME/.local/share/applications/" 2>/dev/null
+xdg-mime default auto-extract.desktop application/zip 2>/dev/null
 
 # Fastfetch
 mkdir -p "$HOME/.config/fastfetch"

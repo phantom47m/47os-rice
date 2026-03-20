@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Auto Extract
+Exec=bash -c 'f="%f"; cd "$(dirname "$f")" && case "$f" in *.zip) unzip -o "$f";; *.tar.gz|*.tgz) tar xzf "$f";; *.tar.bz2) tar xjf "$f";; *.tar.xz) tar xJf "$f";; *.tar) tar xf "$f";; *.rar) unrar x "$f";; *.7z) 7z x "$f";; esac && notify-send "Extracted" "$(basename "$f")" -i extract-archive-symbolic'
+Type=Application
+NoDisplay=true
+MimeType=application/zip;application/x-compressed-tar;
