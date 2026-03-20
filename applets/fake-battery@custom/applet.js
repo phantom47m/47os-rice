@@ -23,20 +23,19 @@ class BatteryApplet extends Applet.IconApplet {
     }
 
     _findBattery() {
-        // Look for a battery in /sys/class/power_supply/
+        // Look for a real laptop battery in /sys/class/power_supply/
+        // Only match BAT* devices — skip USB peripherals like apple_mfi_fastcharge
         try {
             let dir = Gio.File.new_for_path(BATTERY_PATH);
             let enumerator = dir.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
             let info;
             while ((info = enumerator.next_file(null)) !== null) {
                 let name = info.get_name();
+                if (!name.match(/^BAT[0-9]/)) continue;
                 let typePath = BATTERY_PATH + "/" + name + "/type";
                 let [ok, contents] = GLib.file_get_contents(typePath);
-                if (ok) {
-                    let type = contents.toString().trim();
-                    if (type === "Battery") {
-                        return BATTERY_PATH + "/" + name;
-                    }
+                if (ok && contents.toString().trim() === "Battery") {
+                    return BATTERY_PATH + "/" + name;
                 }
             }
         } catch (e) {
