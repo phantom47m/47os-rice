@@ -1,0 +1,8 @@
+[Nemo Action]
+Name=Empty Trash
+Comment=Empty the trash with sound
+Exec=bash -c 'gio trash --empty && paplay /usr/share/sounds/freedesktop/stereo/trash-empty.oga 2>/dev/null; notify-send "Trash" "Trash emptied" -i user-trash-symbolic -t 2000'
+Icon-Name=user-trash-full-symbolic
+Selection=None
+Extensions=any;
+Conditions=desktop;

@@ -142,7 +142,8 @@ sudo apt update -qq 2>/dev/null
 if sudo apt install -y \
     alacritty plank rofi xdotool wmctrl xbindkeys xss-lock \
     brightnessctl pulseaudio-utils maim nemo-preview copyq kdeconnect \
-    inotify-tools devilspie2 macchanger x11-utils ffmpeg \
+    inotify-tools devilspie2 macchanger x11-utils ffmpeg zenity \
+    libinput-tools \
     python3 jq curl wget git dconf-cli lm-sensors \
     gnome-maps gnome-contacts gnome-clocks gnome-calendar cheese \
     rhythmbox shotwell drawing simple-scan 2>/dev/null; then
@@ -362,7 +363,8 @@ for script in launch-terminal.sh toggle-transparency.sh window-close-sound.py \
               close-window.sh maximize-window.sh minimize-window.sh \
               fullscreen-toggle.sh lock-screen.sh powermenu.sh app-search.sh \
               spotlight-search.sh screenshot-float.sh \
-              battery-monitor.sh dynamic-wallpaper.sh; do
+              battery-monitor.sh dynamic-wallpaper.sh \
+              force-quit.sh about-47os.sh pip-toggle.sh; do
     if [ -f "$SCRIPT_DIR/scripts/$script" ]; then
         cp "$SCRIPT_DIR/scripts/$script" "$HOME/Documents/47industries/$script"
         chmod +x "$HOME/Documents/47industries/$script"
@@ -439,9 +441,33 @@ cp "$SCRIPT_DIR/config/devilspie2/transparency.lua" "$HOME/.config/devilspie2/"
 mkdir -p "$HOME/.config/rofi/themes"
 cp "$SCRIPT_DIR/config/rofi/spotlight.rasi" "$HOME/.config/rofi/themes/" 2>/dev/null
 
-# Nemo actions (right-click extract, etc.)
+# Nemo actions (right-click extract, trash sound, etc.)
 mkdir -p "$HOME/.local/share/nemo/actions"
 cp "$SCRIPT_DIR/config/nemo-actions/"*.nemo_action "$HOME/.local/share/nemo/actions/" 2>/dev/null
+
+# Touchpad gestures config (for laptops)
+cp "$SCRIPT_DIR/config/libinput-gestures.conf" "$HOME/.config/" 2>/dev/null
+
+# Smooth font rendering (macOS-quality text)
+gsettings set org.cinnamon.desktop.font-rendering antialiasing 'rgba' 2>/dev/null
+gsettings set org.cinnamon.desktop.font-rendering hinting 'slight' 2>/dev/null
+
+# Window shadows + rounded CSD corners
+GTK_CSS="$HOME/.config/gtk-3.0/gtk.css"
+if ! grep -q "47os-shadows" "$GTK_CSS" 2>/dev/null; then
+    cat >> "$GTK_CSS" << 'SHADOWCSS'
+
+/* 47os-shadows start */
+decoration {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+decoration:backdrop {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+/* 47os-shadows end */
+SHADOWCSS
+fi
 
 # Auto-extract on double-click (zip, tar, etc.)
 cp "$SCRIPT_DIR/config/auto-extract.desktop" "$HOME/.local/share/applications/" 2>/dev/null

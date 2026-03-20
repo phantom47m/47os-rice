@@ -26,6 +26,10 @@ gtk-theme='WhiteSur-Dark'
 icon-theme='WhiteSur-dark'
 font-name='SF Pro Display 10'
 
+[org/cinnamon/desktop/font-rendering]
+antialiasing='rgba'
+hinting='slight'
+
 [org/cinnamon/desktop/wm/preferences]
 theme='WhiteSur-Dark'
 titlebar-font='SF Pro Display Bold 10'
