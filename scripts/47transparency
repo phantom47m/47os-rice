@@ -14,7 +14,18 @@ case "$1" in
         [ "$LEVEL" -gt 100 ] 2>/dev/null && LEVEL=100
         echo "$LEVEL" > "$STATE_FILE"
         TSTATE=$(cat "$TRANS_STATE" 2>/dev/null)
-        [ "$TSTATE" != "on" ] && exit 0
+        TOGGLE_SCRIPT="$HOME/Documents/47industries/toggle-transparency.sh"
+        # Slider to 0 = turn off transparency
+        if [ "$LEVEL" -eq 0 ] && [ "$TSTATE" = "on" ]; then
+            [ -x "$TOGGLE_SCRIPT" ] && "$TOGGLE_SCRIPT"
+            exit 0
+        fi
+        # Slider above 0 but transparency is off = turn it on first
+        if [ "$LEVEL" -gt 0 ] && [ "$TSTATE" != "on" ]; then
+            [ -x "$TOGGLE_SCRIPT" ] && "$TOGGLE_SCRIPT"
+            # toggle-transparency.sh calls us back with the saved level, so exit
+            exit 0
+        fi
         WINDOW_OPACITY=$(awk "BEGIN { printf \"%.2f\", 1.0 - ($LEVEL * 0.007) }")
         XPROP_VAL=$(awk "BEGIN { v = 1.0 - ($LEVEL * 0.007); printf \"0x%08X\", v * 4294967295 }")
         TERM_TRANS=$(awk "BEGIN { printf \"%d\", $LEVEL * 0.85 }")
