@@ -68,5 +68,5 @@ unredirect-fullscreen-windows=true
 computer-icon-visible=false
 home-icon-visible=false
 network-icon-visible=false
-trash-icon-visible=false
+trash-icon-visible=true
 volumes-visible=false
