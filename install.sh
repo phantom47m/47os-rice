@@ -585,8 +585,8 @@ if [ -d "$SCRIPT_DIR/system/web-greeter/themes/47-macos" ]; then
            ! sudo apt-get install -y nody-greeter 2>/dev/null; then
             # Download web-greeter .deb from GitHub releases
             progress "Downloading web-greeter from GitHub..."
-            local WG_DEB="/tmp/web-greeter.deb"
-            local WG_ARCH
+            WG_DEB="/tmp/web-greeter.deb"
+            WG_ARCH=""
             WG_ARCH=$(dpkg --print-architecture 2>/dev/null || echo "amd64")
             # Try nody-greeter first (actively maintained fork)
             if curl -fsSL -o "$WG_DEB" "https://github.com/JezerM/nody-greeter/releases/latest/download/nody-greeter-${WG_ARCH}.deb" 2>/dev/null || \
@@ -608,7 +608,7 @@ if [ -d "$SCRIPT_DIR/system/web-greeter/themes/47-macos" ]; then
     fi
 
     # Determine which greeter binary is available
-    local GREETER_BIN=""
+    GREETER_BIN=""
     if command -v web-greeter &>/dev/null; then
         GREETER_BIN="web-greeter"
     elif command -v nody-greeter &>/dev/null; then
@@ -617,7 +617,7 @@ if [ -d "$SCRIPT_DIR/system/web-greeter/themes/47-macos" ]; then
 
     if [ -n "$GREETER_BIN" ]; then
         # Install the 47-macos theme (check both possible theme dirs)
-        local THEME_DIR="/usr/share/web-greeter/themes"
+        THEME_DIR="/usr/share/web-greeter/themes"
         [ "$GREETER_BIN" = "nody-greeter" ] && [ -d "/usr/share/nody-greeter/themes" ] && THEME_DIR="/usr/share/nody-greeter/themes"
         sudo mkdir -p "$THEME_DIR"
         sudo cp -r "$SCRIPT_DIR/system/web-greeter/themes/47-macos" "$THEME_DIR/"
