@@ -138,6 +138,9 @@ ok "Current settings backed up."
 # STEP 1: Install apt packages
 # ============================================================
 progress "Installing system packages..."
+# Fix any broken package state before installing (prevents failures from prior dpkg errors)
+sudo dpkg --configure -a 2>/dev/null
+sudo apt --fix-broken install -y 2>/dev/null
 sudo apt update -qq 2>/dev/null
 if sudo apt install -y \
     alacritty plank rofi xdotool wmctrl xbindkeys xss-lock \
