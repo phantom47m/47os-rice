@@ -214,7 +214,7 @@ rm -f "$HOME/.config/devilspie2/transparency.lua" 2>/dev/null
 
 # Remove Nemo actions
 rm -f "$HOME/.local/share/nemo/actions/extract-here.nemo_action" 2>/dev/null
-rm -f "$HOME/.local/share/nemo/actions/trash-sound.nemo_action" 2>/dev/null
+rm -f "$HOME/.local/share/nemo/actions/empty-trash-sound.nemo_action" 2>/dev/null
 
 # Remove auto-extract handler and SoundCloud webapp
 rm -f "$HOME/.local/share/applications/auto-extract.desktop" 2>/dev/null
