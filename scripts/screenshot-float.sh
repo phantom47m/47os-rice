@@ -32,4 +32,4 @@ notify-send "Screenshot Saved" "$FILEPATH" \
     -a "47 Screenshot"
 
 # Play capture sound if available
-[ -x "$HOME/.local/bin/47sound" ] && 47sound play "$HOME/Documents/47industries/sounds/screenshot.wav" 2>/dev/null &
+[ -x "$HOME/.local/bin/47sound" ] && 47sound play "$HOME/Documents/47industries/sounds/zoom.wav" 2>/dev/null &

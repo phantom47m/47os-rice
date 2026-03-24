@@ -94,7 +94,7 @@ else
         killall devilspie2 2>/dev/null
 
         # Remove all window opacity
-        get_all_wids | xargs -P0 -I{} xprop -id {} -f _NET_WM_WINDOW_OPACITY 32c -remove _NET_WM_WINDOW_OPACITY &
+        get_all_wids | xargs -P4 -I{} xprop -id {} -f _NET_WM_WINDOW_OPACITY 32c -remove _NET_WM_WINDOW_OPACITY &
 
         # Cinnamon panel menus back to solid
         [ -f "$MENU_OPAQUE" ] && cp "$MENU_OPAQUE" "$MENU_SVG"

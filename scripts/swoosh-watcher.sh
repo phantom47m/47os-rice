@@ -2,8 +2,8 @@
 # Swoosh sound watcher - plays sounds on file downloads and deletions
 # Rate-limited: one sound at a time, cooldown between plays
 
-DOWNLOAD_SOUND="$HOME/.local/share/sounds/custom/download-swoosh.wav"
-DELETE_SOUND="$HOME/.local/share/sounds/custom/delete-swoosh.wav"
+DOWNLOAD_SOUND="$HOME/.local/share/47industries/sounds/air-swoosh-1.mp3"
+DELETE_SOUND="$HOME/.local/share/47industries/sounds/air-swish-1.mp3"
 COOLDOWN=2  # seconds between sounds
 
 TRASH_DIR="$HOME/.local/share/Trash/files"

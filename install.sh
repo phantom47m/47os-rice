@@ -261,10 +261,10 @@ else
     rm -rf WhiteSur-icon-theme
     if git clone --depth 1 https://github.com/vinceliuice/WhiteSur-icon-theme.git 2>/dev/null; then
         cd WhiteSur-icon-theme && ./install.sh 2>/dev/null && ok "WhiteSur icons installed." || fail "Icon theme install failed."
-        cd "$SCRIPT_DIR"
     else
         fail "Could not clone WhiteSur icons. Check internet connection."
     fi
+    cd "$SCRIPT_DIR"
 fi
 
 if [ -d "$HOME/.local/share/icons/WhiteSur-cursors" ]; then
@@ -274,10 +274,10 @@ else
     rm -rf WhiteSur-cursors
     if git clone --depth 1 https://github.com/vinceliuice/WhiteSur-cursors.git 2>/dev/null; then
         cd WhiteSur-cursors && ./install.sh 2>/dev/null && ok "WhiteSur cursors installed." || fail "Cursor install failed."
-        cd "$SCRIPT_DIR"
     else
         fail "Could not clone WhiteSur cursors."
     fi
+    cd "$SCRIPT_DIR"
 fi
 
 # Custom panel icons
@@ -351,7 +351,8 @@ progress "Installing 47 Industries scripts..."
 mkdir -p "$HOME/.local/bin"
 
 for script in 47sound 47transparency 47glass-inject.sh \
-              matrix-47.py saber-drag.sh swoosh-watcher.sh 47sound-inject.sh; do
+              matrix-47.py saber-drag.sh swoosh-watcher.sh 47sound-inject.sh \
+              middle-click-hold.py; do
     if [ -f "$SCRIPT_DIR/scripts/$script" ]; then
         cp "$SCRIPT_DIR/scripts/$script" "$HOME/.local/bin/$script"
         chmod +x "$HOME/.local/bin/$script"

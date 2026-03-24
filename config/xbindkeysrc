@@ -1,3 +1,6 @@
+# Middle click (scroll wheel press) — handled by middle-click-hold.py
+# (holds Space while button is held, for Claude Code voice input)
+
 # Back side button — Enter key
 "xdotool key Return"
   b:8

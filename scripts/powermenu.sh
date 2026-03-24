@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-choice=$(printf "Shutdown\nReboot\nLock\nLogout\nCancel" | rofi -dmenu -theme ~/Documents/47industries/industries.rasi -p "What option?")
+choice=$(printf "Shutdown\nReboot\nLock\nLogout\nCancel" | rofi -dmenu -theme "$HOME/Documents/47industries/industries.rasi" -p "What option?")
 case "$choice" in
     Shutdown) systemctl poweroff ;;
     Reboot) systemctl reboot ;;
