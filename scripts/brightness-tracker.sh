@@ -23,7 +23,7 @@ case "$1" in
 esac
 
 # Get current brightness percentage - extract from (XX%) pattern
-PERCENT=$(brightnessctl -d "$DEVICE" 2>/dev/null | grep -oP '\(\K[0-9]+(?=%\))')
+PERCENT=$(brightnessctl -d "$DEVICE" 2>/dev/null | sed -n 's/.*(\([0-9]*\)%).*/\1/p')
 
 if [ -n "$PERCENT" ]; then
     notify-send -h "int:value:$PERCENT" \

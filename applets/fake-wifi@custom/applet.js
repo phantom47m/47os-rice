@@ -2,6 +2,7 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
+const St = imports.gi.St;
 
 class FakeWifiApplet extends Applet.IconApplet {
     constructor(orientation, panelHeight, instanceId) {
@@ -111,7 +112,7 @@ class FakeWifiApplet extends Applet.IconApplet {
                 let item = new PopupMenu.PopupIconMenuItem(label, signalIcon, St.IconType.SYMBOLIC);
                 let ssid = net.ssid;
                 item.connect("activate", () => {
-                    Util.spawnCommandLine("nmcli device wifi connect '" + ssid + "'");
+                    Util.spawn(['nmcli', 'device', 'wifi', 'connect', ssid]);
                 });
                 this.menu.addMenuItem(item);
             }
@@ -134,8 +135,6 @@ class FakeWifiApplet extends Applet.IconApplet {
         this.menu.toggle();
     }
 }
-
-const St = imports.gi.St;
 
 function main(metadata, orientation, panelHeight, instanceId) {
     return new FakeWifiApplet(orientation, panelHeight, instanceId);

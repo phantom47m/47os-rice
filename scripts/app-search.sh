@@ -1,3 +1,4 @@
 #!/bin/bash
 47sound play "$HOME/Documents/47industries/sounds/search.wav" &
-cinnamon-menu-search
+# Open Cinnamon menu (has built-in search — just start typing)
+xdotool key super

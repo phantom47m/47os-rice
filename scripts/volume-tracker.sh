@@ -11,7 +11,7 @@ if ! command -v wpctl &>/dev/null; then
         down) pactl set-sink-volume @DEFAULT_SINK@ "-${STEP}%" ;;
         mute) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
     esac
-    VOLUME=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | head -1 | tr -d '%')
+    VOLUME=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oE '[0-9]+%' | head -1 | tr -d '%')
     MUTED=$(pactl get-sink-mute @DEFAULT_SINK@ | grep -c "yes")
     if [ "$MUTED" = "1" ]; then
         notify-send -h "int:value:$VOLUME" -h string:x-canonical-private-synchronous:volume "Volume" "Muted"

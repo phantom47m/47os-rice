@@ -108,7 +108,7 @@ class CompizWindowsEffectExtension {
             global.window_manager.disconnect(this.sizeChangeOpId);
         }
         
-        global.get_window_actors().forEach(function (actor) {
+        global.get_window_actors().forEach((actor) => {
             if (actor) {
                 let effect = actor.get_effect(this.EFFECT_NAME);
                 if (effect) {

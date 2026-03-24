@@ -31,6 +31,7 @@ case "${1:-status}" in
     play)
         shift; sound_file="$1"
         [[ -z "$sound_file" ]] && { echo "Error: No sound file specified" >&2; exit 1; }
+        [[ ! -f "$sound_file" ]] && exit 0
         [[ "$muted" == "true" ]] && exit 0
         [[ "$volume" -eq 0 ]] && exit 0
         pa_vol=$(( volume * 65536 / 100 ))

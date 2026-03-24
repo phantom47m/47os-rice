@@ -83,8 +83,8 @@ class BrightnessApplet extends Applet.IconApplet {
         let kbSlider = new Slider.Slider(0.5);
         kbSlider.connect("value-changed", (slider, value) => {
             // Most desktop PCs don't have keyboard backlight, but if they do:
-            let level = Math.round(value * 3);
-            Util.spawnCommandLine("bash -c 'echo " + level + " | sudo tee /sys/class/leds/*/brightness 2>/dev/null'");
+            let percent = Math.round(value * 100);
+            Util.spawnCommandLine("brightnessctl -d '*::kbd_backlight' set " + percent + "% 2>/dev/null");
         });
         kbSliderItem.addActor(kbSlider.actor, { expand: true });
         this.menu.addMenuItem(kbSliderItem);
