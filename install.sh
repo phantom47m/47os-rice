@@ -845,6 +845,21 @@ if ! grep -q 'HOME/bin' "$HOME/.bashrc" 2>/dev/null; then
 fi
 mkdir -p "$HOME/bin"
 
+# Terminal title lock — lets user run "title My Session" to pin the tab name
+# The prompt resets the title after every command so subprocesses can't override it
+if ! grep -q "TERM_TITLE" "$HOME/.bashrc" 2>/dev/null; then
+    cat >> "$HOME/.bashrc" << 'TITLEBLOCK'
+
+# 47 Industries — Persistent terminal title
+# Usage: title "My Session Name" (locks the tab title)
+title() { export TERM_TITLE="$*"; }
+if [ -n "$TERM_TITLE" ]; then
+    PROMPT_COMMAND='echo -ne "\033]0;${TERM_TITLE}\007"'
+fi
+TITLEBLOCK
+    ok "Added 'title' command to .bashrc (pin terminal tab names)."
+fi
+
 # Matrix splash screen
 if ! grep -q "matrix-47.py" "$HOME/.bashrc" 2>/dev/null; then
     echo '' >> "$HOME/.bashrc"
