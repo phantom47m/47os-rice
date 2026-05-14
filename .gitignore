@@ -2,3 +2,11 @@
 *.swo
 *~
 .DS_Store
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Local-only configs (user-specific paths)
+.mcp.json
+launch-project.sh

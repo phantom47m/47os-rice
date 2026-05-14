@@ -26,7 +26,7 @@ A comprehensive Linux Mint Cinnamon desktop customization that transforms stock 
 ## Install
 
 ```bash
-sudo apt install git -y && git clone <repo-url> && cd 47os-rice && bash install.sh
+sudo apt install git -y && git clone https://github.com/phantom47m/47os-rice.git && cd 47os-rice && bash install.sh
 ```
 
 ## What You Get
@@ -42,7 +42,7 @@ sudo apt install git -y && git clone <repo-url> && cd 47os-rice && bash install.
 - **Brave browser** with Safari icon
 - **Alacritty terminal** with neon cyan theme
 - **Window transparency toggle** (Ctrl+Alt+G)
-- **6 custom Cinnamon applets** (brightness, battery, WiFi, sound, VPN, volume)
+- **Custom Cinnamon applets** (brightness, fake battery, fake WiFi, 47 sound)
 - Force Quit, PiP, About dialog, and more
 
 ## Uninstall
